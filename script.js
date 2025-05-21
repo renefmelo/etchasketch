@@ -51,9 +51,19 @@ function removeGrid() {
 
 // Colorir no hover
 
+let random = (min, max) => {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
 container.addEventListener('mouseover', (event) => {
 	let target = event.target;
-	target.classList.add('squareHovered')
+	const targetStyles = window.getComputedStyle(target);
+	if (targetStyles.getPropertyValue("background-color") == "rgb(255, 255, 255)"){
+		target.style.backgroundColor = `hsl(${random(0, 360)} ${random(0, 100)}% ${random(0, 100)}%)`;
+	}
 })
 
 
