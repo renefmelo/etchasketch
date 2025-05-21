@@ -1,14 +1,10 @@
 const container = document.querySelector('.container');
 const gridBt = document.querySelector('.gridBt');
 
-let gridSize = 80;
+let gridSize = 16;
 
 let columns = gridSize;
 let lines = gridSize;
-
-console.log(columns);
-console.log(lines);
-console.log(gridSize);
 
 // Main code
 
@@ -61,8 +57,13 @@ let random = (min, max) => {
 container.addEventListener('mouseover', (event) => {
 	let target = event.target;
 	const targetStyles = window.getComputedStyle(target);
+	let opacity = 10;
 	if (targetStyles.getPropertyValue("background-color") == "rgb(255, 255, 255)"){
 		target.style.backgroundColor = `hsl(${random(0, 360)} ${random(0, 100)}% ${random(0, 100)}%)`;
+		target.style.opacity = `${opacity}%`
+	} else {
+		let opacityNow = Number(targetStyles.getPropertyValue("opacity"));
+		target.style.opacity = `${opacityNow + 0.1}`
 	}
 })
 
