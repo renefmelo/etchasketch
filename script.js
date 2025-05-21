@@ -1,20 +1,53 @@
 const container = document.querySelector('.container');
+const gridBt = document.querySelector('.gridBt');
 
-let columns = 80;
-let lines = 80;
+let gridSize = 80;
 
-for (let i = 0; i < lines; i++){
-	for (let j = 0; j < columns; j++) {
-		const square = document.createElement('div');
-		square.classList.add('square');
-		container.appendChild(square);
+let columns = gridSize;
+let lines = gridSize;
+
+console.log(columns);
+console.log(lines);
+console.log(gridSize);
+
+// Main code
+
+createGrid(columns, lines);
+
+// Mudar grid com botão
+
+gridBt.addEventListener('click', (event) => {
+	gridSize = Number(prompt(`say a grid size (100 or less)`));
+	while (gridSize > 100) {
+		gridSize = Number(prompt(`Patty don't start. 100 or less.`));
 	}
-	const breaker = document.createElement('div');
-	breaker.classList.add('breaker');
-	container.appendChild(breaker);
+	columns = gridSize;
+	lines = gridSize;
+	removeGrid();
+	createGrid(columns, lines);
+})
+
+
+// Gerar Grid
+
+function createGrid(columns, lines) {
+	for (let i = 0; i < lines; i++){
+		for (let j = 0; j < columns; j++) {
+			const square = document.createElement('div');
+			square.classList.add('square');
+			container.appendChild(square);
+		}
+		const breaker = document.createElement('div');
+		breaker.classList.add('breaker');
+		container.appendChild(breaker);
+	}
 }
 
-container.removeChild(container.lastChild);
+function removeGrid() {
+	while (container.firstChild) {
+		container.removeChild(container.firstChild);
+	}
+}
 
 // Colorir no hover
 
